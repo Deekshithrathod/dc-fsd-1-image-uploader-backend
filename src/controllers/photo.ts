@@ -34,7 +34,6 @@ export const getPhoto = async (req: Request, res: Response) => {
     return res.status(404).json({ msg: "No file found" });
   }
   // TODO update access count
-  // phot
   await Photo.findOneAndUpdate(
     { _id: photo._id },
     {

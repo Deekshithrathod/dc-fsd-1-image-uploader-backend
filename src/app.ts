@@ -5,17 +5,14 @@ import { config } from "dotenv";
 import cors from "cors";
 config();
 import { dbConnection } from "./db/db";
-import appRootPath from "app-root-path";
-import path from "path";
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.MODE === "prod" ? process.env.PORT : 3000;
 
 const app: Express = express();
 
 // middlewares
 app.use(cors());
 app.use(express.json());
-app.use(express.static(path.join(appRootPath.toString(), "public")));
 app.use(
   fileUpload({
     limits: { fileSize: 5 * 1024 * 1024 },
@@ -27,9 +24,6 @@ app.use(
 
 // Routes
 app.use("/photos", photoRoute);
-app.get("/", (req, res) => {
-  res.sendFile(path.join(appRootPath.toString(), "public", "index.html"));
-});
 
 dbConnection.on("connected", () => {
   console.log(`DB Connection successfull`);

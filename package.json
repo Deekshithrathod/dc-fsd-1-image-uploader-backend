@@ -8,8 +8,8 @@
     "build": "rimraf dist && npx tsc",
     "prestart": "npm run build",
     "start": "node dist/app.js",
-    "preserve": "npm run build",
-    "serve": "concurrently \"npx tsc -w\"  \"nodemon dist/app.js\""
+    "predev": "npm run build",
+    "dev": "concurrently \"npx tsc -w\"  \"nodemon dist/app.js\""
   },
   "keywords": [],
   "author": "",
